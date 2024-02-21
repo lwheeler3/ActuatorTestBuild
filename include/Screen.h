@@ -29,7 +29,7 @@ public:
     // Additional methods for Screen
 
     void displayTime();
-    void displayLapTime(unsigned int inTime);
+    void displayLapTime(int inSeconds, int milliseconds);
     void setMatrix(Adafruit_7segment myMatrix);
 };
 

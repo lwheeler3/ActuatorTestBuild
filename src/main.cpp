@@ -7,7 +7,7 @@
 
 CAN_message_t rmsg;
 FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> myCan;
-int ledPins[] = {15, 16, 17, 18, 19}; // Change these to be the pins we need
+int ledPins[] = {41, 40, 39, 38, 37}; // Change these to be the pins we need
 
 LEDArray myLED = LEDArray(ledPins);
 
@@ -15,7 +15,7 @@ Adafruit_7segment matrix = Adafruit_7segment();
 
 Screen myScreen = Screen();
 
-Actuator* testArray[] = {&myLED};
+Actuator* testArray[] = {&myLED, &myScreen};
 
 Dashboard myDash(testArray, 0);
 
@@ -38,7 +38,7 @@ void setup() {
 
 void loop() {
 
-  Serial.println("UpdateDisplay");
+  //Serial.println("UpdateDisplay");
 
   myDash.updateDisplay();
 
@@ -47,7 +47,7 @@ void loop() {
   //matrix.print(100, DEC);
   //matrix.writeDisplay();
 
-  Serial.println("-----LOOP OVER-----");
+  //Serial.println("-----LOOP OVER-----");
 
   delay(100);
 

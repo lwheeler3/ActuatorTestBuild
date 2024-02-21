@@ -3,7 +3,7 @@
 
 Screen::Screen() {
     this -> mode = 0; //mode 0 = time display // mode 1 = lap display
-    this -> pauseTime = 1000; // ms that lap time will display at the end of the lap
+    this -> pauseTime = 10000; // ms that lap time will display at the end of the lap
     this -> modeTimeStart = 0;
     this -> timeStartTime = millis();
 
@@ -11,18 +11,16 @@ Screen::Screen() {
 }
 
 
-void Screen::displayLapTime(unsigned int inTime) {
+void Screen::displayLapTime(int inSeconds, int milliseconds) {
     this -> mode = 1;
 
     this -> modeTimeStart = millis();
 
     // Code that displays on the screen what the passed in laptime was
 
-    unsigned long currentTime = 0;
+    unsigned int seconds = milliseconds;
 
-    unsigned int seconds = currentTime % 60;
-
-    unsigned int minutes = currentTime / 60;
+    unsigned int minutes = inSeconds;
 
     //Displays it on the screen
 
@@ -36,6 +34,8 @@ void Screen::displayLapTime(unsigned int inTime) {
 
     matrix.drawColon(true);
     matrix.writeDisplay();
+
+    Serial.println("SET LAPTIME TO DISPLAY");
 
 
 }
@@ -82,10 +82,13 @@ void Screen::displayTime() {
 void Screen::updateValue(const SensorData& data) {
 
     //Pull the lap time from the sensorData object
+    int* gotData = data.getData();
 
-    //Strip time data to get the unsigned
+    int seconds = gotData[1];
+    int milliseconds = gotData[2];
+    Serial.println("PARSED LAP");
 
-    //displayLapTime();
+    displayLapTime(seconds, milliseconds);
 }
 
 void Screen::setMatrix(Adafruit_7segment myMatrix) {

@@ -86,7 +86,7 @@ int Dashboard::getSensorIndex(int id) {
  */
 void Dashboard::updateDisplay() {
 
-    Serial.println("Ran Function");
+    //Serial.println("Ran Function");
     CAN_message_t rmsg;
     if (this->can1.read(rmsg)) {
         Serial.println("GOT CAN");
@@ -98,8 +98,8 @@ void Dashboard::updateDisplay() {
         Serial.print("ACTUATOR INDEX: ");
         Serial.println(actuatorIndex);
 
-        Serial.print("BAT%: ");
-        Serial.println(rmsg.buf[0]);
+        //Serial.print("BAT%: ");
+        //Serial.println(rmsg.buf[0]);
         if (actuatorIndex >= 0 && actuatorIndex < numActuators) { // This will break cause num actuators is min 1 and the return can be 0
             SensorData* sensorData = new SensorData(rmsg);
             display[actuatorIndex]->updateValue(*sensorData);
